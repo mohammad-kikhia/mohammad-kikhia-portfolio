@@ -1,0 +1,223 @@
+/* -------------------------------------------------------------------------- */
+/*  Skills honeycomb grid – vanilla CSS port of the Emotion example          */
+/* -------------------------------------------------------------------------- */
+
+/* Container: behaves like cssHoneycombGrid in your example */
+
+#skillsHexGrid {
+  /* Layout variables – tweak these to change size/density */
+  --edge: 2.8rem;      /* inner hex edge length (controls overall size) */
+  --border: 1px;       /* border thickness around each hex */
+  --gap: 0.3rem;       /* gap between neighbouring hexes */
+  --sqrt3: 1.7320508076;
+  --outerEdge: calc(var(--edge) + var(--border));
+  /* direction multiplier: 1 for LTR, -1 for RTL (set further below) */
+  --dir-mult: 1;
+
+  --polygon: polygon(
+    0% 25%,
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+
+  /* Placeholder / centering math from the example */
+  --placeholderX: calc((var(--outerEdge) * var(--sqrt3) + var(--gap)) * 2);
+  --placeholderY: calc(var(--outerEdge) * 3 + var(--gap) * var(--sqrt3));
+  --centerShiftX: calc(
+    (var(--outerEdge) / 2 * var(--sqrt3) - var(--gap) / 2) / 2
+  );
+  --centerShiftY: calc((var(--outerEdge) - var(--gap) * var(--sqrt3)) / 4);
+
+  /* Colors can be overridden from outside if desired */
+  --backgroundColor: var(--accent-soft);
+  --borderColor: color-mix(in srgb, var(--accent) 60%, transparent 40%);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  min-width: var(--placeholderX);
+  padding: var(--centerShiftY) var(--centerShiftX);
+
+  width: 90%;
+  margin: 0 auto;
+  list-style: none;
+}
+
+/* Slight font shrink on very small screens */
+@media (max-width: 400px) {
+  #skillsHexGrid {
+    font-size: 13px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Outer hex wrapper – corresponds to "outer" in the JS example              */
+/* -------------------------------------------------------------------------- */
+
+.skill-hex {
+  /* "Outer" has no visible size by itself; its child is absolutely placed */
+  width: 0;
+  height: 0;
+  position: relative;
+}
+
+/* Each "middle" element: .skill-hex-inner */
+
+.skill-hex-inner {
+  --width: calc(var(--outerEdge) * var(--sqrt3));
+
+  min-width: var(--width);
+  width: var(--width);
+  height: calc(var(--outerEdge) * 2);
+
+  /* Base transform, then adjusted per nth-child below */
+  --transform: translate(
+    calc(0px - var(--centerShiftX)),
+    calc(0px - var(--centerShiftY))
+  );
+
+  clip-path: var(--polygon);
+  background-color: var(--backgroundColor);
+
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inner content – we only use div for content (no background span) */
+
+.skill-hex-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  width: calc(var(--edge) * var(--sqrt3));
+  height: 90% !important;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+}
+
+.skill-hex-content img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.skill-hex-label {
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+/* Hex borders using pseudo‑elements (like in the demo) */
+
+.skill-hex-inner > .skill-hex-content,
+.skill-hex-inner::before,
+.skill-hex-inner::after {
+  content: "";
+  position: absolute;
+  height: var(--outerEdge);
+  width: calc(var(--edge) * var(--sqrt3));
+  /* border-width: 0 var(--border); */
+  border-style: solid;
+  border-color: var(--borderColor);
+  }
+
+.skill-hex-inner > .skill-hex-content {
+  position: absolute;
+  inset: calc(var(--gap) / 2 + var(--border))
+    calc(
+      (var(--gap) / 2 + var(--border)) * var(--sqrt3) / 2
+    );
+}
+
+.skill-hex-inner::before {
+  transform: rotate(60deg);
+  z-index: -1;
+  }
+
+.skill-hex-inner::after {
+  transform: rotate(120deg);
+  z-index: -1;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Honeycomb positioning – 4‑wide / 5‑wide stagger                           */
+/* -------------------------------------------------------------------------- */
+
+/* Placeholder size for each group of 4 */
+.skill-hex:nth-child(4n + 1) {
+  width: var(--placeholderX);
+  height: var(--placeholderY);
+  }
+
+/* Top‑left of the group */
+.skill-hex:nth-child(4n + 1) > .skill-hex-inner {
+  transform: var(--transform);
+  }
+
+/* Top‑right of the group */
+.skill-hex:nth-child(4n + 2) > .skill-hex-inner {
+  transform: translate(
+      calc(var(--dir-mult) * -1 * var(--placeholderX) / 2)
+    )
+    var(--transform);
+}
+
+/* Bottom‑left of the group */
+.skill-hex:nth-child(4n + 3) > .skill-hex-inner {
+  transform: translate(
+      calc(var(--dir-mult) * -3 * var(--placeholderX) / 4),
+      calc(var(--placeholderY) / 2)
+    )
+    var(--transform);
+  }
+
+/* Bottom‑right of the group */
+.skill-hex:nth-child(4n + 4) > .skill-hex-inner {
+  transform: translate(
+      calc(var(--dir-mult) * -1 * var(--placeholderX) / 4),
+      calc(var(--placeholderY) / 2)
+    )
+    var(--transform);
+  }
+
+/* Flip horizontal positioning in RTL while keeping math shared */
+html[dir='rtl'] #skillsHexGrid {
+  --dir-mult: -1;
+  }
+
+/* -------------------------------------------------------------------------- */
+/*  Responsive tweaks – slightly larger hexes on bigger screens               */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  #skillsHexGrid {
+    --edge: 3.1rem;
+    --gap: 0.35rem;
+  }
+
+  .skill-hex-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #skillsHexGrid {
+    --edge: 3.4rem;
+    --gap: 0.4rem;
+  }
+
+  .skill-hex-content img {
+    width: 36px;
+    height: 36px;
+  }
+}

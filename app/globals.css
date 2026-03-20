@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+/* ---- THEME TOKENS (LIGHT / DARK) ---- */
+:root {
+  /* base colors - LIGHT THEME by default */
+  --background: #f9fafb; /* light gray */
+  --foreground: #020617; /* near-black */
+  --muted-foreground: #6b7280; /* slate-like for subtle text */
+  --accent: #2563eb; /* blue */
+  --accent-soft: rgba(37, 99, 235, 0.25);
+  --on-accent: #020617; /* text on accent backgrounds */
+}
+
+/* honor system preference on first paint when there is no saved theme yet */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617; /* slate-950 */
+    --foreground: #e5e7eb; /* slate-200 */
+    --muted-foreground: #9ca3af; /* lighter muted text on dark */
+    --accent: #ef4444; /* red */
+    --accent-soft: rgba(239, 68, 68, 0.6);
+    --on-accent: #020617; /* keep dark text on bright accent */
+  }
+}
+
+/* override via JS ThemeProvider using data-theme on <html> */
+:root[data-theme='light'] {
+  --background: #f9fafb;
+  --foreground: #020617;
+  --muted-foreground: #6b7280;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.25);
+  --on-accent: #020617;
+}
+
+:root[data-theme='dark'] {
+  --background: #020617;
+  --foreground: #e5e7eb;
+  --muted-foreground: #9ca3af;
+  --accent: #ef4444;
+  --accent-soft: rgba(239, 68, 68, 0.6);
+  --on-accent: #020617;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Subtle global background "hive" effect                                    */
+/*                                                                            */
+/*  - Soft animated blobs using accent colors                                 */
+/*  - Very low-contrast hex-like pattern using gradients                      */
+/*  - Lives behind all content (z-index: -1)                                  */
+/* -------------------------------------------------------------------------- */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Large accent blobs (top-left / bottom-right) */
+body::before {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent-soft) 80%, transparent 20%) 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent-soft) 60%, transparent 40%) 0, transparent 55%);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Background pattern overlay – soft accent dots grid                        */
+/*                                                                            */
+/*  Replaces the hex grid with a more neutral, modern pattern: a grid of     */
+/*  blurred accent dots that feels like a soft bokeh / particle field.       */
+/*  It stays behind all content and uses the accent color so it matches      */
+/*  both light and dark themes.                                              */
+/* -------------------------------------------------------------------------- */
+
+body::after {
+  /* Base color for the dots: soft, semi-transparent accent. */
+  --dot-color: color-mix(in srgb, var(--accent) 20%, transparent 80%);
+
+  /* Two staggered radial-gradient layers:
+     - First grid sits on integer cells.
+     - Second grid is shifted by half a cell for a honeycomb‑like offset,
+       but with circular dots instead of hard hex lines. */
+  background-image:
+    radial-gradient(
+      circle at center,
+      var(--dot-color) 0,
+      var(--dot-color) 18%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at center,
+      var(--dot-color) 0,
+      var(--dot-color) 18%,
+      transparent 40%
+    );
+
+  /* Size of each "cell" in the dot grid; tweak both equally to resize the pattern. */
+  background-size: 120px 120px;
+
+  /* Offset the second layer by half a cell for a staggered, organic feel. */
+  background-position:
+    0 0,                    /* first dot grid */
+    60px 60px;              /* second grid shifted by half of 120px */
+
+  /* Overall transparency so the effect stays behind the UI. */
+  opacity: 0.1;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    opacity: 0.35;
+    filter: blur(16px);
+  }
+
+  body::after {
+    opacity: 0.06;
+  }
+}
+
+/* Slightly tone down overlays in explicit dark theme so they don't overpower */
+html[data-theme='dark'] body::before {
+  opacity: 0.95;
+  filter: blur(3px);
+}
+
+html[data-theme='dark'] body::after {
+  opacity: 0.16;
+}
+
+/* Make background details more visible specifically in explicit light theme */
+html[data-theme='light'] body::before {
+  opacity: 1;
+  filter: blur(5px);
+}
+
+html[data-theme='light'] body::after {
+  opacity: 0.18;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Contact background glow mix-blend-mode switching (LTR/RTL safe)            */
+/* -------------------------------------------------------------------------- */
+
+.contact-hero-bg {
+  mix-blend-mode: difference;
+  /* color-dodge / hard-light / lighten / darken */
+}
+
+html[data-theme='dark'] .contact-hero-bg {
+  mix-blend-mode: lighten;
+}
+
+/* utilities used in the new hero / theme switcher */
+.text-primary {
+  color: var(--foreground);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.text-on-accent {
+  color: var(--on-accent);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  About hex animation helpers                                             */
+/* -------------------------------------------------------------------------- */
+
+.about-hex-glow {
+  animation: aboutHexGlow 7s ease-in-out infinite;
+  transform: translateZ(0);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+  /* Stronger glow color derived from the accent. */
+  /* Keep it "cool" (blue-ish) even when the theme accent switches (e.g. dark mode). */
+  --about-hex-glow-color: color-mix(in srgb, #60a5fa 78%, var(--accent) 22%);
+}
+
+.about-hex-float {
+  animation: aboutHexFloat 6s ease-in-out infinite;
+  transform: translateZ(0);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+}
+
+/* Image zoom animation inside the About hex mask */
+.about-hex-image-zoom {
+  animation: aboutHexImageZoom 6.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@keyframes aboutHexImageZoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes aboutHexGlow {
+  0%,
+  100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 26px var(--about-hex-glow-color))
+      drop-shadow(0 0 58px var(--about-hex-glow-color))
+      saturate(1)
+      blur(0px);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.97;
+    filter:
+      drop-shadow(0 0 30px var(--about-hex-glow-color))
+      drop-shadow(0 0 72px var(--about-hex-glow-color))
+      saturate(1.18)
+      blur(0.25px);
+    transform: scale(1.015);
+  }
+}
+
+@keyframes aboutHexFloat {
+  0%,
+  100% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  50% {
+    /* Avoid translating: clipping can look like "bouncing inside borders" */
+    transform: scale(1.05);
+    opacity: 0.99;
+  }
+}
+
+/* Radial glow layer inside the hex mask (subtle, cool, not too trippy) */
+.about-hex-radial-glow {
+  background: radial-gradient(
+    circle at 50% 40%,
+    color-mix(in srgb, var(--accent) 78%, transparent 22%) 0%,
+    color-mix(in srgb, #60a5fa 92%, transparent 8%) 18%,
+    color-mix(in srgb, #60a5fa 45%, transparent 55%) 40%,
+    transparent 62%
+  );
+  opacity: 1;
+  filter: blur(40px) saturate(1.6);
+  animation: aboutHexRadialPulse 5s ease-in-out infinite;
+}
+
+@keyframes aboutHexRadialPulse {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hex-glow,
+  .about-hex-float,
+  .about-hex-image-zoom,
+  .about-hex-radial-glow {
+    animation: none;
+  }
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-accent-soft {
+  background-color: var(--accent-soft);
+}
+
+.shadow-accent {
+  box-shadow: 0 0 40px var(--accent-soft);
+}
