@@ -37,8 +37,8 @@ const Contact = async ({
       className="contact py-16"
     >
       <div className="mx-auto w-full max-w-7xl px-6">
-        <div className="container overflow-hidden ">
-          <div className="content flex flex-col gap-10 px-6 py-10 md:px-10 md:py-12 lg:flex-row lg:items-center">
+        <div className="container overflow-hidden mx-auto">
+          <div className="content flex flex-col gap-10 px-0 py-10 md:px-10 md:py-12 lg:flex-row lg:items-center">
             {/* LEFT: TEXT + SOCIALS */}
             <div className="flex-1 space-y-8">
               <div className="space-y-3 pb-7">
@@ -47,7 +47,7 @@ const Contact = async ({
                 </h2>
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
                   <Iconify
-                    icon="fa:mouse-pointer"
+                    icon="bx:support"
                     className="me-2 inline-block text-accent"
                   />
                   {t.subtitle}
@@ -84,7 +84,7 @@ const Contact = async ({
             <div className="flex-1">
               <div className="relative mx-auto max-w-md">
                 <div className="absolute inset-0 rounded-4xl blur-3xl" />
-                <div className="relative rounded-4xl border border-accent p-6 shadow-accent md:p-8 overflow-hidden">
+                <div className="relative rounded-4xl border border-accent p-4 pt-5 shadow-accent md:p-8 md:pt-8 overflow-hidden">
                   <Image
                     src={ImagesSrc.bgHex}
                     alt="Background"

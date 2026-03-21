@@ -81,7 +81,7 @@ const About = async ({
                 </h2>
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
                   <Iconify
-                    icon="fa:mouse-pointer"
+                    icon="fontisto:info"
                     className="me-2 inline-block text-accent"
                   />
                   {t?.subtitle}
