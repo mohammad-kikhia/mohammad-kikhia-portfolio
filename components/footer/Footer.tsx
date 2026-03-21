@@ -74,7 +74,7 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
                       href={item.href}
                       className="flex items-center gap-2 hover:text-accent transition"
                     >
-                      <Iconify icon={item.icon} />
+                      <Iconify icon={item.icon} className="text-accent" />
                       <span dir="ltr">{item.title}</span>
                     </a>
                   ) : (
@@ -86,7 +86,7 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
                       data-aos-offset="50"
                       className="flex items-center gap-2"
                     >
-                      <Iconify icon={item.icon} />
+                      <Iconify icon={item.icon} className="text-accent" />
                       <span dir="ltr">{item.title}</span>
                     </p>
                   ),
@@ -95,9 +95,6 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-                {t.common.contact_methods.email}
-              </p>
               <div className="socials">
                 <ul className="flex flex-wrap items-center gap-3">
                   {socials.map((item, i) => (
@@ -113,9 +110,12 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
                         aria-label={item.title}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-primary hover:bg-accent hover:text-on-accent transition"
+                        className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
                       >
-                        <Iconify icon={item.icon} />
+                        <Iconify
+                          icon={item.icon}
+                          className="transition-transform duration-300 group-hover:scale-110 group-hover:text-background"
+                        />
                       </a>
                     </li>
                   ))}

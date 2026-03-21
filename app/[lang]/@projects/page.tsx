@@ -20,7 +20,11 @@ function renderWithSpan(template: string) {
   );
 }
 
-const Work = async ({ params }: { params: { lang: Locale } }) => {
+const Work = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const t = dictionary.projects;
@@ -37,7 +41,7 @@ const Work = async ({ params }: { params: { lang: Locale } }) => {
           <div className="flex flex-col gap-10 lg:flex-row">
             {/* LEFT: HEADING + CAROUSEL */}
             <div className="flex-1 space-y-6">
-              <div className="space-y-2">
+              <div className="space-y-3 pb-7">
                 <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                   {renderWithSpan(t.title)}
                 </h2>
@@ -46,7 +50,7 @@ const Work = async ({ params }: { params: { lang: Locale } }) => {
                     icon="fa:mouse-pointer"
                     className="me-2 inline-block text-accent"
                   />
-                  {/* No extra subtitle in dictionary yet; keep simple */}
+                  {t.subtitle}
                 </p>
               </div>
 

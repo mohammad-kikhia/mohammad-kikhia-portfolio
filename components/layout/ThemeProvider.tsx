@@ -20,6 +20,12 @@ const COOKIE_KEY = 'theme';
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  function syncDomTheme(value: Theme) {
+    if (typeof document === 'undefined') return;
+    document.documentElement.classList.toggle('dark', value === 'dark');
+    document.documentElement.dataset.theme = value;
+  }
+
   function getCookieValue(name: string): string | null {
     if (typeof document === 'undefined') return null;
 
@@ -54,8 +60,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const initial: Theme = initialFromCookie ?? (systemPrefersDark ? 'dark' : 'light');
 
     // Keep DOM in sync as early as possible (before useEffect runs).
-    document?.documentElement?.classList?.toggle('dark', initial === 'dark');
-    document.documentElement.dataset.theme = initial;
+    syncDomTheme(initial);
     setThemeCookie(initial);
 
     return initial;
@@ -64,8 +69,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
       const next: Theme = prev === 'light' ? 'dark' : 'light';
-      document?.documentElement?.classList?.toggle('dark', next === 'dark');
-      document.documentElement.dataset.theme = next;
+      syncDomTheme(next);
       setThemeCookie(next);
       return next;
     });

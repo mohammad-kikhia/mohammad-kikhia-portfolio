@@ -55,16 +55,16 @@
   },
 
   "about": {
-    "section_title": "about {span}me{span}",
+    "section_title": "About {span}Me{span}",
     "title": "I'm Mohammad",
-    "subtitle": "ReactJS-NextJS developer",
+    "subtitle": "React & Next.js developer",
     "subtext": "As a dedicated ReactJS-NextJS developer with three years of experience, I bring a passion for coding and a year of hands-on freelance experience to the table. My commitment to writing clean, well-documented, and accessible code using modern frameworks ensures that every project I work on is of the highest quality. I take pride in creating digital solutions that are not only functional but also beautifully crafted with love.",
     "resume": "my resume"
   },
 
   "skills": {
-    "title": "skills & {span}abilities{span}",
-    "subtitle": "the tools I use to build",
+    "title": "Skills & {span}Stack{span}",
+    "subtitle": "Tools I build with",
     "intro": "I care a lot about writing frontends that are reliable, predictable and easy to evolve, not just nice to look at.",
     "highlights": [
       "Comfortable moving across the stack: from designing UI flows and components to wiring data and handling edge cases",
@@ -74,13 +74,15 @@
   },
 
   "projects": {
-    "title": "personal {span}projects{span}",
+    "title": "My {span}Projects{span}",
+    "subtitle": "Shipped work & experiments",
     "visit": "visit",
     "code": "code"
   },
 
   "contact": {
-    "title": "get {span}in touch{span}",
+    "title": "Say {span}Hello{span}",
+    "subtitle": "Collaborate or ask anything",
     "name": "name",
     "email": "email",
     "subject": "subject",

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import EmailForm from '@/components/contact/EmailForm';
 import Iconify from '@/components/shared/Iconify';
 import { socials } from '@/data/variables';
-import { getDictionary, Locale } from '../dictionaries';
+import { getDictionary } from '../dictionaries';
 import { ImagesSrc } from '@/data/files';
 
 function renderWithSpan(template: string) {
@@ -22,7 +22,11 @@ function renderWithSpan(template: string) {
   );
 }
 
-const Contact = async ({ params }: { params: { lang: Locale } }) => {
+const Contact = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const t = dictionary.contact;
@@ -37,10 +41,7 @@ const Contact = async ({ params }: { params: { lang: Locale } }) => {
           <div className="content flex flex-col gap-10 px-6 py-10 md:px-10 md:py-12 lg:flex-row lg:items-center">
             {/* LEFT: TEXT + SOCIALS */}
             <div className="flex-1 space-y-8">
-              <div className="space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-                  {dictionary.common.nav.contact}
-                </p>
+              <div className="space-y-3 pb-7">
                 <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                   {renderWithSpan(t.title)}
                 </h2>
@@ -49,7 +50,7 @@ const Contact = async ({ params }: { params: { lang: Locale } }) => {
                     icon="fa:mouse-pointer"
                     className="me-2 inline-block text-accent"
                   />
-                  {dictionary.hero.connect}
+                  {t.subtitle}
                 </p>
               </div>
 
@@ -58,10 +59,7 @@ const Contact = async ({ params }: { params: { lang: Locale } }) => {
               </p>
 
               <div className="pt-4">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-                  {dictionary.common.contact_methods.email}
-                </p>
-                <ul className="flex flex-wrap items-center gap-4">
+                <ul className="flex flex-wrap items-center gap-3">
                   {socials.map((item) => (
                     <li key={item.title}>
                       <a
@@ -69,9 +67,12 @@ const Contact = async ({ params }: { params: { lang: Locale } }) => {
                         aria-label={item.title}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-on-accent shadow-accent transition hover:brightness-110"
+                        className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
                       >
-                        <Iconify icon={item.icon} />
+                        <Iconify
+                          icon={item.icon}
+                          className="transition-transform duration-300 group-hover:scale-110 group-hover:text-background"
+                        />
                       </a>
                     </li>
                   ))}

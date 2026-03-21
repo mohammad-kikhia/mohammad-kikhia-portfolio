@@ -18,14 +18,20 @@ function renderHeroTitle(template: string) {
             {part}
           </span>
         ) : (
-          part
+          <span key={index} className="">
+            {part}
+          </span>
         )
       )}
     </>
   );
 }
 
-export default async function Home({ params }: { params: { lang: Locale } }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
@@ -62,18 +68,15 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
               href="#about"
               data-aos="zoom-in"
               data-aos-offset="0"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold tracking-wide shadow-lg shadow-accent transition hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-lg shadow-accent transition hover:brightness-110"
             >
               <span>{dictionary.common.nav.about}</span>
-              <Iconify icon="fa7-solid:arrow-alt-circle-down" />
+              <Iconify icon="fa7-solid:arrow-alt-circle-down" className="text-white" />
             </Link>
           </div>
 
           {/* ---------- SOCIAL ICON LINKS ---------- */}
-          <div className="pt-6 border-t border-slate-300/30 dark:border-slate-800">
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-muted">
-              {dictionary.hero.connect}
-            </p>
+          <div className="pt-2 border-t border-slate-300/30 dark:border-slate-800">
             <ul className="flex flex-wrap items-center gap-3">
               {socials.map((item, i) => (
                 <li key={item.title}>
@@ -101,7 +104,7 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
 
         {/* ---------- RIGHT: PROFILE IMAGE / VISUAL ---------- */}
         <div className="flex-1">
-          <div className="group relative mx-auto h-72 w-72 md:h-80 md:w-80">
+          <div className="group relative mx-auto h-72 w-72 md:h-100 md:w-100">
             <div className="absolute inset-0 rounded-full bg-accent-soft blur-3xl transition-transform duration-500 group-hover:scale-105" />
             <div className="hero-blob relative h-full w-full overflow-hidden rounded-[40%] border border-accent bg-linear-to-br from-slate-900 via-slate-950 to-slate-900 shadow-accent">
               <Image

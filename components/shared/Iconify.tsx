@@ -23,7 +23,7 @@ const Iconify = forwardRef<SVGSVGElement, Props>(
       style={{
         width,
         height: height ?? width,
-        display: 'inline-block',
+        // display: 'inline-block',
         ...style,
       }}
       {...other}

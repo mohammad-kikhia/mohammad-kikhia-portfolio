@@ -190,19 +190,24 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
               href={current.links.visit}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-accent px-3 py-2 text-xs font-semibold uppercase tracking-wide text-accent transition hover:bg-accent hover:text-on-accent"
+              className="inline-flex min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-full bg-accent px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-lg shadow-accent transition hover:brightness-110"
             >
-              <Iconify icon="fa:eye" />
+              <Iconify icon="fa:eye" className="text-white" />
               {t.visit}
             </a>
             <a
               href={current.links.code}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-slate-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-primary transition hover:border-accent hover:text-accent"
+              className="group inline-flex min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-full border border-accent/40 bg-transparent px-3 py-2 text-xs font-semibold uppercase tracking-wide text-accent shadow-sm transition-[border-color,background-color,color,box-shadow] duration-200 ease-out hover:border-accent hover:bg-accent hover:text-background hover:shadow-sm"
             >
-              <Iconify icon="fa:code" />
-              {t.code}
+              <Iconify
+                icon="fa:code"
+                className="text-current transition-colors duration-200 group-hover:text-background"
+              />
+              <span className="transition-colors duration-200 group-hover:text-background">
+                {t.code}
+              </span>
             </a>
           </div>
         </div>
@@ -210,4 +215,3 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
     </div>
   );
 }
-

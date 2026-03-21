@@ -20,7 +20,11 @@ export async function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'ar' }]
 }
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
@@ -30,7 +34,10 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
     author: dictionary?.common?.metadata?.author,
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia.vercel.app';
+
   return {
+    metadataBase: new URL(siteUrl),
     title: {
       template: `%s | ${metaData.title}`,
       default: metaData.title,
@@ -38,6 +45,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
     description: metaData.description,
     icons: {
       // icon: '../favicon.ico',
+      icon: '/icon',
     },
     robots: {
       index: true,
@@ -57,12 +65,12 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
       'محمد كيخيا',
       'Frontend Developer',
       'مطور ويب',
-      'ReactJS',
-      'رياكت جي اس',
-      'NextJS',
-      'نيكست جي اس',
       'Web Development',
       'تطوير الويب',
+      'NextJS',
+      'نيكست جي اس',
+      'ReactJS',
+      'رياكت جي اس',
       'JavaScript',
       'TypeScript',
       'HTML',
@@ -134,7 +142,7 @@ export default async function RootLayout({
   contact,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
   about: ReactNode;
   skills: ReactNode;
   projects: ReactNode;

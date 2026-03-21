@@ -20,13 +20,10 @@ import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import {
-  InputGroup,
   InputGroupAddon,
-  InputGroupText,
   InputGroupTextarea,
 } from '@/components/ui/input-group';
 
@@ -159,7 +156,7 @@ export default function EmailForm({ t, lang }: Props) {
                       : ''
                   }
                   placeholder=" "
-                  className="peer h-full rounded-full ps-10 pt-4 pb-1 bg-white/90 focus:bg-white dark:bg-background/60 dark:focus:bg-background/80"
+                  className="peer h-full rounded-full ps-10 pt-4 pb-1"
                 />
                 <InputGroupAddon className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
                   <Iconify icon="fa:user" />
@@ -199,7 +196,7 @@ export default function EmailForm({ t, lang }: Props) {
                   aria-invalid={fieldState.invalid}
                   dir={field.value?.trim() ? 'ltr' : ''}
                   placeholder=" "
-                  className="peer h-full rounded-full ps-10 pt-4 pb-1 bg-white/90 focus:bg-white dark:bg-background/60 dark:focus:bg-background/80"
+                  className="peer h-full rounded-full ps-10 pt-4 pb-1"
                 />
                 <InputGroupAddon className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
                   <Iconify icon="fa:envelope" />
@@ -245,7 +242,7 @@ export default function EmailForm({ t, lang }: Props) {
                       : ''
                   }
                   placeholder=" "
-                  className="peer h-full rounded-full ps-10 pt-4 pb-1 bg-white/90 focus:bg-white dark:bg-background/60 dark:focus:bg-background/80"
+                  className="peer h-full rounded-full ps-10 pt-4 pb-1"
                 />
                 <InputGroupAddon className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
                   <Iconify icon="fa:info-circle" />
@@ -279,7 +276,7 @@ export default function EmailForm({ t, lang }: Props) {
             fieldState: ControllerFieldState;
           }) => (
             <Field data-invalid={fieldState.invalid}>
-              <div className="relative h-28">
+              <div className="relative h-28 mb-6">
                 <InputGroupTextarea
                   {...field}
                   id="form-message"
@@ -292,7 +289,7 @@ export default function EmailForm({ t, lang }: Props) {
                   }
                   placeholder=" "
                   rows={5}
-                  className="peer resize-none pt-5 bg-white/90 focus:bg-white dark:bg-background/60 dark:focus:bg-background/80"
+                  className="peer resize-none pt-5"
                 />
                 <label
                   htmlFor="form-message"
@@ -313,12 +310,11 @@ export default function EmailForm({ t, lang }: Props) {
           data-aos="fade-up"
           data-aos-offset="0"
           type="submit"
-          className="px-6 py-2 mt-5"
-          // disabled={!form.formState.isValid || isLoading}
+          className="px-6 py-2 mt-5 cursor-pointer"
           disabled={isLoading}
         >
-          {t.submit}{' '}
-          <Iconify icon="fa:paper-plane" />
+          {t.submit}
+          <Iconify icon={isLoading ? "codex:loader" : "fa:paper-plane"} className="ms-2" />
         </Button>
       </div>
     </form>

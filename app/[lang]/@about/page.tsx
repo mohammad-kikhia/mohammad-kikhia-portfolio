@@ -24,7 +24,11 @@ function renderWithSpan(template: string) {
 const HEX_CLIP_PATH =
   'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)';
 
-const About = async ({ params }: { params: { lang: Locale } }) => {
+const About = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const t = dictionary?.about;
@@ -91,10 +95,10 @@ const About = async ({ params }: { params: { lang: Locale } }) => {
               <Link
                 href={FilesSrc.resumePath}
                 target="_blank"
-                className="inline-flex items-center gap-2 rounded-full border border-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent transition hover:bg-accent hover:text-on-accent"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-accent transition hover:brightness-110"
               >
                 <span>{t?.resume}</span>
-                <Iconify icon="fa6-solid:download" />
+                <Iconify icon="fa6-solid:download" className="text-white" />
               </Link>
             </div>
           </div>

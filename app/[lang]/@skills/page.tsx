@@ -22,7 +22,11 @@ function renderWithSpan(template: string) {
   );
 }
 
-const Skills = async ({ params }: { params: { lang: Locale } }) => {
+const Skills = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const t = dictionary.skills;
@@ -33,19 +37,6 @@ const Skills = async ({ params }: { params: { lang: Locale } }) => {
       className="py-16"
     >
       <div className="mx-auto w-full max-w-7xl px-6">
-        {/* <div className="space-y-3">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            {renderWithSpan(t.title)}
-          </h2>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-            <Iconify
-              icon="fa:mouse-pointer"
-              className="me-2 inline-block text-accent"
-            />
-            {t.subtitle}
-          </p>
-        </div> */}
-
         <div className="mt-8 flex flex-col gap-10 md:mt-12 md:flex-row md:items-start md:justify-between">
           {/* ===== SKILLS DESCRIPTION ===== */}
           <div className="md:w-5/12">
@@ -76,15 +67,7 @@ const Skills = async ({ params }: { params: { lang: Locale } }) => {
             )}
           </div>
           {/* ===== SKILLS HEX GRID ===== */}
-          <div className="mt-4 flex justify-center md:mt-0 md:w-6/12 relative">
-            <Image
-              src={ImagesSrc.bgStars}
-              alt="Background"
-              width={1000}
-              height={1000}
-              draggable={false}
-              className="absolute top-0 left-0 w-full h-full z-[-1] object-cover opacity-30 mix-blend-lighten"
-            />
+          <div className="mt-4 flex justify-center md:mt-0 md:w-6/12">
             <ul id="skillsHexGrid">
               {skills.map((skill) => (
                 <li key={skill.name} className="skill-hex">

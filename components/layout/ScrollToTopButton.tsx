@@ -26,7 +26,7 @@ const ScrollToTopButton = ({ t }: { t: Trans }) => {
 
   return (
     <div className="top-to-btm">
-      <Link href="#home" title={t.top}>
+      <Link href="#home" title={t.common.nav.top}>
         {showTopBtn && (
           <Iconify
             icon="fa:angle-up"

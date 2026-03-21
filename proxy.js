@@ -27,6 +27,11 @@ export function proxy(request) {
 
   if (pathnameHasLocale) return
 
+  // Next.js App Router metadata routes (must not get a locale prefix)
+  if (pathname === '/icon' || pathname === '/apple-icon') {
+    return
+  }
+
   // Skip static assets (files in public folder are served from root)
   if (pathname.startsWith('/assets/') || pathname.startsWith('/favicon') || pathname.startsWith('/_next/static/')) {
     return
@@ -44,6 +49,7 @@ export const config = {
   matcher: [
     // Skip all internal paths (_next), API routes, and public folder
     // Run proxy on all non-internal, non-API, non-public routes
+    // Note: /icon and /apple-icon are excluded inside proxy() so /icons/* still matches
     '/((?!_next|api|public).*)',
     // Optional: only run on root (/) URL
     // '/'

@@ -29,7 +29,7 @@ export const InputGroupTextarea = React.forwardRef<
     <textarea
       ref={ref}
       className={cn(
-        'min-h-24 w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-primary placeholder:text-muted shadow-sm transition focus:border-accent focus:outline-none focus:ring-0 dark:border-slate-700 dark:bg-slate-900/70 dark:text-primary',
+        'min-h-24 w-full resize-none rounded-2xl border border-foreground/15 bg-background/95 px-4 py-3 text-sm text-foreground shadow-sm backdrop-blur-sm transition placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-0 dark:border-foreground/20 dark:bg-background/55',
         className,
       )}
       {...props}

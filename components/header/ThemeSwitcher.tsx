@@ -5,20 +5,23 @@ import { useTheme } from '@/components/layout/ThemeProvider'
 
 export function ThemeSwitcher() {
   const { theme, toggleTheme } = useTheme()
+  const isDark = theme === 'dark'
 
   return (
     <button
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent text-accent hover:bg-accent hover:text-on-accent transition"
+      type="button"
       onClick={toggleTheme}
-      aria-label="Toggle theme"
+      aria-label={isDark ? 'Switch to light (angel mode)' : 'Switch to dark (devil mode)'}
+      title={isDark ? 'Angel mode' : 'Devil mode'}
+      aria-pressed={isDark}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent transition-all duration-300 hover:border-accent hover:bg-accent/18 hover:shadow-accent focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-background"
     >
-      {theme === 'light' ? (
-        <Iconify icon="hugeicons:evil" />
-        // <Iconify icon="fa6-solid:moon" />
-      ) : (
-        <Iconify icon="hugeicons:angel" />
-        // <Iconify icon="fa6-solid:sun" />
-      )}
+      <Iconify
+        // icon={isDark ? "hugeicons:angel" : "hugeicons:evil"}
+        icon={isDark ? "hugeicons:angel" : "icomoon-free:evil"}
+        width={19}
+        className="transition-transform duration-300 hover:scale-110"
+      />
     </button>
   )
 }

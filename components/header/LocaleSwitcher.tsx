@@ -2,6 +2,7 @@
 
 import { DEFAULT_LOCALE, LOCALES, LOCALES_List } from '@/data/costants'
 import { usePathname, useRouter } from 'next/navigation'
+import Iconify from '../shared/Iconify'
 
 export function LocaleSwitcher() {
   const pathname = usePathname()
@@ -36,94 +37,23 @@ export function LocaleSwitcher() {
     }
   }
 
+  const nextLocale =
+    LOCALES_List.find((locale) => locale.code !== currentLocale) ?? LOCALES_List[0]
+
+  if (!nextLocale || nextLocale.code === currentLocale) return null
+
   return (
-    <div className="flex items-center gap-2">
-      {LOCALES_List.map((locale) => {
-        if (locale.code !== currentLocale) return (
-          <button
-            key={locale.code}
-            onClick={() => switchLocale(locale.code)}
-            disabled={locale.code === currentLocale}
-            className={`${locale.code === currentLocale ? 'font-bold text-gray-500' : 'cursor-pointer text-primary'}`}
-          >
-            {locale.name}
-          </button>
-        )
-      })}
-    </div>
+    <button
+      type="button"
+      onClick={() => switchLocale(nextLocale.code)}
+      aria-label={`Switch language to ${nextLocale.name}`}
+      title={`Switch to ${nextLocale.name}`}
+      className="inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-accent/40 bg-accent/10 px-2 text-accent transition-all duration-300 hover:border-accent hover:bg-accent/18 hover:shadow-accent focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-background"
+    >
+      <Iconify icon={nextLocale.flag} width={20} className="block md:hidden" />
+      <span className="hidden text-xs font-semibold uppercase tracking-wide md:block">
+        {nextLocale.name}
+      </span>
+    </button>
   )
 }
-
-// 'use client';
-
-// import { usePathname } from 'next/navigation';
-// import Link from 'next/link';
-// import { Locale } from '@/app/[lang]/dictionaries';
-// import Image from 'next/image';
-// import { languages } from '@/data/variables';
-// import ToggleMenu from '../shared/ToggleMenu';
-// import { FaCaretDown } from 'react-icons/fa';
-// import { Trans } from '@/types';
-
-// export default function LocaleSwitcher({
-//   lang,
-//   t,
-// }: {
-//   lang: string;
-//   t: Trans;
-// }) {
-//   const pathName = usePathname();
-//   const setLanguage = (locale: Locale) => {
-//     document.cookie = `NEXT_LOCALE=${locale}; max-age=31536000; path=/`;
-//   };
-//   const redirectedPathName = (locale: Locale) => {
-//     if (!pathName) return '/';
-//     const segments = pathName.split('/');
-//     segments[1] = locale;
-//     return segments.join('/');
-//   };
-
-//   return (
-//     <ToggleMenu
-//       toggleButton={(toggleOpen) => (
-//         <>
-//           <button
-//             title={t.header.language}
-//             className="lang-button"
-//             onClick={toggleOpen}>
-//             <Image
-//               draggable="false"
-//               src={languages.find((language) => language.locale === lang)!.icon}
-//               width={16}
-//               height={12}
-//               alt={lang}
-//             />
-//             <FaCaretDown />
-//           </button>
-//         </>
-//       )}>
-//       {({ close }) => (
-//         <div className="lang-menu">
-//           {languages.map((lng) => (
-//             <Link
-//               className={lang === lng.locale ? 'active' : ''}
-//               key={lng.locale}
-//               href={redirectedPathName(lng.locale)}
-//               onClick={() => {
-//                 setLanguage(lng.locale);
-//               }}>
-//               <Image
-//                 draggable="false"
-//                 src={lng.icon}
-//                 width={16}
-//                 height={12}
-//                 alt={lng.locale}
-//               />
-//               {lng.title}
-//             </Link>
-//           ))}
-//         </div>
-//       )}
-//     </ToggleMenu>
-//   );
-// }

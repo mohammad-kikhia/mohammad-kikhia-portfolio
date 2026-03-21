@@ -30,24 +30,17 @@ const Navbar = ({ lang, t }: { lang: Locale; t: Trans }) => {
         <Link
           data-aos="zoom-in"
           href="#home"
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+          className="flex items-center gap-2 text-md font-semibold tracking-tight text-foreground"
         >
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full shadow-accent">
-            {/* <Iconify icon="fa:react" /> */}
             <span className={`text-4xl font-bold ${rubikWetPaint.className} text-accent`}>M</span>
-            {/* <Image
-              src={ImagesSrc.logoIco}
-              width={32}
-              height={32}
-              alt={t.header.brand}
-            /> */}
           </span>
           <span>{t.header.brand?.split(' ')?.[0]}</span>{' '}
           <span className="hidden sm:block md:hidden lg:block">{t.header.brand?.split(' ')?.[1]}</span>
         </Link>
 
         {/* RIGHT SIDE: LOCALE + THEME + DESKTOP NAV */}
-        <div className="ms-auto flex items-center gap-4">
+        <div className="ms-auto flex items-center gap-2 md:gap-4">
           <div className="flex items-center gap-2" data-aos="zoom-out-down">
             <LocaleSwitcher />
             <ThemeSwitcher />
@@ -60,12 +53,15 @@ const Navbar = ({ lang, t }: { lang: Locale; t: Trans }) => {
 
           {/* MOBILE MENU BUTTON */}
           <button
+            type="button"
             title={hidden ? t.header.open_panel : t.header.close_panel}
+            aria-label={hidden ? t.header.open_panel : t.header.close_panel}
+            aria-expanded={!hidden}
             onClick={toggleSidePanel}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 dark:border-slate-700 text-foreground hover:border-accent hover:text-accent transition md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-foreground/4 text-foreground shadow-sm transition-all duration-300 hover:border-foreground/25 hover:bg-foreground/8 active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:ring-offset-2 focus:ring-offset-background md:hidden"
           >
             {hidden ? (
-              <Iconify icon="fa6-solid:bars" />
+              <Iconify icon="tabler:menu-4" />
             ) : (
               <Iconify icon="fa6-solid:xmark" />
             )}
