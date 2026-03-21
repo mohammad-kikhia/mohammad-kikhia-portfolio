@@ -34,7 +34,7 @@ export async function generateMetadata({
     author: dictionary?.common?.metadata?.author,
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia-portfolio.vercel.app';
 
   return {
     metadataBase: new URL(siteUrl),
@@ -99,7 +99,7 @@ export async function generateMetadata({
     ],
     authors: [
       { name: metaData.author },
-      { name: metaData.author, url: 'https://mohammad-kikhia.vercel.app' },
+      { name: metaData.author, url: 'https://mohammad-kikhia-portfolio.vercel.app' },
     ],
     category: 'technology',
     publisher: metaData.author,
@@ -114,7 +114,7 @@ export async function generateMetadata({
       title: metaData.title,
       description: metaData.description,
       siteName: metaData.title,
-      url: 'https://mohammad-kikhia.vercel.app',
+      url: 'https://mohammad-kikhia-portfolio.vercel.app',
       images: [
         {
           url: ImagesSrc.me1,

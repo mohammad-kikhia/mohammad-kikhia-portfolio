@@ -47,7 +47,7 @@ export default function NavMenu({ t, setHidden, className = '' }: Props) {
   return (
     <ul
       onClick={(e) => e.stopPropagation()}
-      className={`flex items-center gap-6 text-sm font-medium text-muted h-screen ${className}`}
+      className={`flex items-center gap-6 text-sm font-medium text-muted ${className}`}
     >
       {sections.map((item, i) => {
         const active = item === visibleSection;

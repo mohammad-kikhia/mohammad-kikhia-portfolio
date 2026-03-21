@@ -51,7 +51,7 @@ export const projects = [
     image: ImagesSrc.portfolio,
     // image: 'portfolio',
     links: {
-      visit: 'https://mohammad-kikhia.vercel.app',
+      visit: 'https://mohammad-kikhia-portfolio.vercel.app',
       code: 'https://github.com/M7MD-abo-jacob/Mohammad-Kikhia',
     },
   },
