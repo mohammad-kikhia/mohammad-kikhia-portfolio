@@ -3,7 +3,7 @@
 This is my main portfolio  
 It was made with create-react-app
 
-## _Check it out [here.](https://mohammad-kikhia-portfolio.vercel.app)_
+## _Check it out [here.](https://mohammad-kikhia.vercel.app)_
 
 ## Some of the technologies and libraries used:
 

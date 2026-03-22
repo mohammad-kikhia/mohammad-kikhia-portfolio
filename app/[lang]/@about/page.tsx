@@ -42,7 +42,11 @@ const About = async ({
         <div className="">
           <div className="flex flex-col gap-10 md:flex-row">
             {/* LEFT: IMAGE */}
-            <div className="flex-1 md:max-w-sm md:self-center">
+            <div
+              className="flex-1 md:max-w-sm md:self-center"
+              data-aos="zoom-in"
+              data-aos-delay="0"
+            >
               {/* Fixed-size hex image (outside glow/border + inside zoom animation) */}
               <div
                 className="relative mx-auto h-64 w-80"
@@ -74,7 +78,11 @@ const About = async ({
             </div>
 
             {/* RIGHT: TEXT */}
-            <div className="flex-1 space-y-6">
+            <div
+              className="flex-1 space-y-6"
+              data-aos="fade-up"
+              data-aos-delay="80"
+            >
               <div className="space-y-2">
                 <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                   {renderWithSpan(t?.section_title)}

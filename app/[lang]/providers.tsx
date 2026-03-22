@@ -18,7 +18,12 @@ function Providers({
 }) {
   useEffect(() => {
     //  initialize AOS "animate on scroll" when the app loads
-    AOS.init({});
+    AOS.init({
+      duration: 650,
+      once: true,
+      offset: 48,
+      easing: 'ease-out-cubic',
+    });
     //   change the title meta tag when the user opens another tab
     if (typeof window !== 'undefined') {
       const title = dictionary?.common?.metadata?.title;

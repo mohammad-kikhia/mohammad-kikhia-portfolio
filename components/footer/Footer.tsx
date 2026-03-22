@@ -54,7 +54,11 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
           </div>
 
           {/* ---------- CONTACT METHODS + SOCIALS ---------- */}
-          <div className="flex-1 space-y-4 md:max-w-xs">
+          <div
+            className="flex-1 space-y-4 md:max-w-xs"
+            data-aos="fade-up"
+            data-aos-delay="60"
+          >
             <div className="space-y-3">
               <h3
                 data-aos="zoom-in"
@@ -126,7 +130,11 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
         </div>
 
         {/* ---------- CREDIT ---------- */}
-        <div className="border-t border-slate-800 pt-4 text-center text-xs text-muted">
+        <div
+          className="border-t border-slate-800 pt-4 text-center text-xs text-muted"
+          data-aos="fade-up"
+          data-aos-delay="40"
+        >
           <span>{t.footer.signature.made_with} </span>
           <Iconify icon="fa:heart" className="text-red-500 inline-block mx-1" />
           <span>{t.footer.signature.by} </span>

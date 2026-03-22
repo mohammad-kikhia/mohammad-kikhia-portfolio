@@ -7,8 +7,9 @@ import { getDictionary, hasLocale, Locale } from "./dictionaries";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/header/Navbar";
 import { rtlLanguages } from "@/data/variables";
-import "../globals.css";
 import { ImagesSrc } from "@/data/files";
+import "../globals.css";
+import 'aos/dist/aos.css';
 
 const lemonada = Lemonada({
   subsets: ['latin', 'arabic'],
@@ -34,7 +35,7 @@ export async function generateMetadata({
     author: dictionary?.common?.metadata?.author,
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia-portfolio.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia.vercel.app';
 
   return {
     metadataBase: new URL(siteUrl),
@@ -99,7 +100,7 @@ export async function generateMetadata({
     ],
     authors: [
       { name: metaData.author },
-      { name: metaData.author, url: 'https://mohammad-kikhia-portfolio.vercel.app' },
+      { name: metaData.author, url: 'https://mohammad-kikhia.vercel.app' },
     ],
     category: 'technology',
     publisher: metaData.author,
@@ -114,7 +115,7 @@ export async function generateMetadata({
       title: metaData.title,
       description: metaData.description,
       siteName: metaData.title,
-      url: 'https://mohammad-kikhia-portfolio.vercel.app',
+      url: 'https://mohammad-kikhia.vercel.app',
       images: [
         {
           url: ImagesSrc.me1,

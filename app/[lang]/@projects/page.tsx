@@ -41,7 +41,11 @@ const Work = async ({
           <div className="flex flex-col gap-10 lg:flex-row">
             {/* LEFT: HEADING + CAROUSEL */}
             <div className="flex-1 space-y-6">
-              <div className="space-y-3 pb-7">
+              <div
+                className="space-y-3 pb-7"
+                data-aos="fade-up"
+                data-aos-delay="0"
+              >
                 <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                   {renderWithSpan(t.title)}
                 </h2>
@@ -54,7 +58,12 @@ const Work = async ({
                 </p>
               </div>
 
-              <ProjectsCarousel projects={projects} t={t} lang={currentLang} />
+              <div
+                data-aos="fade-up"
+                data-aos-delay="70"
+              >
+                <ProjectsCarousel projects={projects} t={t} lang={currentLang} />
+              </div>
             </div>
           </div>
         </div>

@@ -40,7 +40,11 @@ const Contact = async ({
         <div className="container overflow-hidden mx-auto">
           <div className="content flex flex-col gap-10 px-0 py-10 md:px-10 md:py-12 lg:flex-row lg:items-center">
             {/* LEFT: TEXT + SOCIALS */}
-            <div className="flex-1 space-y-8">
+            <div
+              className="flex-1 space-y-8"
+              data-aos="fade-right"
+              data-aos-delay="0"
+            >
               <div className="space-y-3 pb-7">
                 <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                   {renderWithSpan(t.title)}
@@ -60,8 +64,13 @@ const Contact = async ({
 
               <div className="pt-4">
                 <ul className="flex flex-wrap items-center gap-3">
-                  {socials.map((item) => (
-                    <li key={item.title}>
+                  {socials.map((item, i) => (
+                    <li
+                      key={item.title}
+                      data-aos="zoom-in"
+                      data-aos-delay={i * 45}
+                      data-aos-offset="20"
+                    >
                       <a
                         href={item.href}
                         aria-label={item.title}
@@ -81,7 +90,11 @@ const Contact = async ({
             </div>
 
             {/* RIGHT: GLOWING FORM CARD */}
-            <div className="flex-1">
+            <div
+              className="flex-1"
+              data-aos="fade-left"
+              data-aos-delay="60"
+            >
               <div className="relative mx-auto max-w-md">
                 <div className="absolute inset-0 rounded-4xl blur-3xl" />
                 <div className="relative rounded-4xl border border-accent p-4 pt-5 shadow-accent md:p-8 md:pt-8 overflow-hidden">

@@ -45,15 +45,27 @@ export default async function Home({
         {/* ---------- LEFT: HERO COPY ---------- */}
         <div className="flex-1 space-y-8">
           <div className="space-y-2">
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+            <h1
+              className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl lg:text-6xl"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
               {renderHeroTitle(dictionary.hero.title)}
             </h1>
           </div>
-          <p className="text-xs font-semibold tracking-[0.25em] text-accent uppercase">
+          <p
+            className="text-xs font-semibold tracking-[0.25em] text-accent uppercase"
+            data-aos="fade-up"
+            data-aos-delay="60"
+          >
             {dictionary.hero.role}
           </p>
 
-          <p className="max-w-xl text-base leading-relaxed md:text-lg min-h-[3lh]">
+          <p
+            className="max-w-xl text-base leading-relaxed md:text-lg min-h-[3lh]"
+            data-aos="fade-up"
+            data-aos-delay="120"
+          >
             {dictionary.hero.subtitle}&nbsp;
             <TypeAnimation
               className="text-accent"
@@ -76,7 +88,11 @@ export default async function Home({
           </div>
 
           {/* ---------- SOCIAL ICON LINKS ---------- */}
-          <div className="pt-2 border-t border-slate-300/30 dark:border-slate-800">
+          <div
+            className="pt-2 border-t border-slate-300/30 dark:border-slate-800"
+            data-aos="fade-up"
+            data-aos-delay="180"
+          >
             <ul className="flex flex-wrap items-center gap-3">
               {socials.map((item, i) => (
                 <li key={item.title}>
@@ -103,7 +119,11 @@ export default async function Home({
         </div>
 
         {/* ---------- RIGHT: PROFILE IMAGE / VISUAL ---------- */}
-        <div className="flex-1">
+        <div
+          className="flex-1"
+          data-aos="fade-left"
+          data-aos-delay="100"
+        >
           <div className="group relative mx-auto h-72 w-72 md:h-100 md:w-100">
             <div className="absolute inset-0 rounded-full bg-accent-soft blur-3xl transition-transform duration-500 group-hover:scale-105" />
             <div className="hero-blob relative h-full w-full overflow-hidden rounded-[40%] border border-accent bg-linear-to-br from-slate-900 via-slate-950 to-slate-900 shadow-accent">
