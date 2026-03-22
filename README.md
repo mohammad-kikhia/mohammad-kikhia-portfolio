@@ -11,8 +11,3 @@ It was made with create-react-app
 - react-icons
 - EmailJs - for "contact me" section
 - AOS: animation on scroll
-
-<!--
-TODO:
-- make fun dark mode??
- -->
