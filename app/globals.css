@@ -3,6 +3,10 @@
 /* Match `dark:` to app theme (html.dark + data-theme), not OS prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ---- THEME TOKENS (LIGHT / DARK) ---- */
 :root {
   /* base colors - LIGHT THEME by default */
@@ -291,6 +295,16 @@ html[data-theme='dark'] .contact-hero-bg {
   }
   50% {
     opacity: 1;
+  }
+}
+
+@keyframes movebtn {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 

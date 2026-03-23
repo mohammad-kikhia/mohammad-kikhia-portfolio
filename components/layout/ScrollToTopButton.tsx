@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Iconify from '@/components/shared/Iconify';
 import { Trans } from '@/types';
 
@@ -25,12 +25,15 @@ const ScrollToTopButton = ({ t }: { t: Trans }) => {
   }, []);
 
   return (
-    <div className="top-to-btm">
+    <div className="relative">
       <Link href="#home" title={t.common.nav.top}>
         {showTopBtn && (
           <Iconify
-            icon="fa:angle-up"
-            className="icon-position icon-style"
+            width={50}
+            height={50}
+            icon="mingcute:up-fill"
+            style={{ insetInlineEnd: 'max(40px, 4vw)' }}
+            className="fixed bottom-10 z-20 cursor-pointer rounded-full border border-accent/40 bg-background/90 text-accent shadow-sm shadow-accent/40 backdrop-blur-sm transition-all duration-300 animate-[movebtn_2.2s_ease-in-out_infinite] hover:animate-none hover:scale-110 hover:border-accent hover:bg-accent hover:text-white! hover:shadow-accent"
           />
         )}
       </Link>

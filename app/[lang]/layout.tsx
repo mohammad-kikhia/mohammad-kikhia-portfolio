@@ -10,6 +10,7 @@ import { rtlLanguages } from "@/data/variables";
 import { ImagesSrc } from "@/data/files";
 import "../globals.css";
 import 'aos/dist/aos.css';
+import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
 
 const lemonada = Lemonada({
   subsets: ['latin', 'arabic'],
@@ -162,12 +163,12 @@ export default async function RootLayout({
 
   return (
     <html
-      className={`${lemonada.className} ${lemonada.variable} ${theme === 'dark' ? 'dark' : ''
+      className={`overflow-x-hidden ${lemonada.className} ${lemonada.variable} ${theme === 'dark' ? 'dark' : ''
         }`}
       lang={lang}
       dir={rtlLanguages.includes(lang) ? 'rtl' : 'ltr'}
       data-theme={theme}>
-      <body>
+      <body className="overflow-hidden">
         <Providers dictionary={dictionary}>
           <Navbar lang={lang} t={dictionary} />
           <main className="pt-10">
@@ -176,6 +177,7 @@ export default async function RootLayout({
             {skills}
             {projects}
             {contact}
+            <ScrollToTopButton t={dictionary} />
           </main>
         </Providers>
         <Footer lang={lang} t={dictionary} />
