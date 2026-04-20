@@ -16,7 +16,14 @@ export const textRegex =
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 // sections of the app
-export const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+export const sections = [
+  'home',
+  'about',
+  'skills',
+  'experience',
+  'projects',
+  'contact',
+];
 
 // my contact methods
 export const contactMethods = [

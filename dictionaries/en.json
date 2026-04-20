@@ -11,6 +11,7 @@
       "about": "about me",
       "skills": "skills",
       "projects": "projects",
+      "experience": "experience",
       "contact": "contact me",
       "top": "to top"
     },
@@ -70,6 +71,37 @@
       "Comfortable moving across the stack: from designing UI flows and components to wiring data and handling edge cases",
       "Used to working in real-world teams with code review, version control, linting and automated checks",
       "Focused on performance, accessibility and long‑term maintainability rather than quick hacks"
+    ]
+  },
+
+  "experience": {
+    "title": "Professional {span}Experience{span}",
+    "subtitle": "Roles, teams & product context",
+    "items": [
+      {
+        "title": "Frontend Developer",
+        "company": "OverZaki",
+        "companyUrl": "https://www.overzaki.com",
+        "employment": "Full-time",
+        "period": "Mar 13, 2024 – Present",
+        "description": "OverZaki is a leading company in AI-powered solutions. I work full-time on a large web product that combines a website builder with business management tooling—helping teams run day-to-day operations in one place.",
+        "highlights": [
+          "Rich product surface: POS flows, WhatsApp Business integrations, staff management, and many adjacent features across the platform",
+          "Frontend ownership across complex screens: performance-minded UI, predictable state, and maintainable components in a fast-moving roadmap",
+          "Close collaboration with product and backend teams to ship end-to-end experiences customers rely on daily"
+        ]
+      },
+      {
+        "title": "Freelance Frontend Developer",
+        "company": "Independent",
+        "employment": "Freelance",
+        "period": "Apr 8, 2023 – Mar 12, 2024",
+        "description": "Delivered frontend work for clients on a project basis—turning designs into responsive interfaces, integrating APIs, and polishing UX details before handoff.",
+        "highlights": [
+          "Built and iterated on marketing sites and web apps using modern React ecosystems",
+          "Practiced clear communication, scope management, and shipping in short feedback loops"
+        ]
+      }
     ]
   },
 

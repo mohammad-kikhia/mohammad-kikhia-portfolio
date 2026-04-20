@@ -140,6 +140,7 @@ export default async function RootLayout({
   params,
   about,
   skills,
+  experience,
   projects,
   contact,
 }: Readonly<{
@@ -147,6 +148,7 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
   about: ReactNode;
   skills: ReactNode;
+  experience: ReactNode;
   projects: ReactNode;
   contact: ReactNode;
 }>) {
@@ -175,6 +177,7 @@ export default async function RootLayout({
             {children}
             {about}
             {skills}
+            {experience}
             {projects}
             {contact}
             <ScrollToTopButton t={dictionary} />
