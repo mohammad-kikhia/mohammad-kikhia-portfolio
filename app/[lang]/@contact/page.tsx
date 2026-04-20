@@ -64,16 +64,21 @@ const Contact = async ({
 
               <div className="pt-4">
                 <ul className="flex flex-wrap items-center gap-3">
-                  {socials.map((item, i) => (
+                  {socials.map((item, i) => {
+                    const socialLabel =
+                      dictionary.common.contact_methods[
+                        item.name as keyof typeof dictionary.common.contact_methods
+                      ];
+                    return (
                     <li
-                      key={item.title}
+                      key={item.name}
                       data-aos="zoom-in"
                       data-aos-delay={i * 45}
                       data-aos-offset="20"
                     >
                       <a
                         href={item.href}
-                        aria-label={item.title}
+                        aria-label={socialLabel}
                         target="_blank"
                         rel="noreferrer"
                         className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
@@ -84,7 +89,8 @@ const Contact = async ({
                         />
                       </a>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               </div>
             </div>

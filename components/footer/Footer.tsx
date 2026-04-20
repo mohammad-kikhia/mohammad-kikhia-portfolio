@@ -1,8 +1,13 @@
-import Link from 'next/link';
-import FaChevronCircleEnd from '@/components/shared/FaChevronCircleEnd';
-import { sections, socials, contactMethods } from '@/data/variables';
-import Iconify from '../shared/Iconify';
-import { Locale } from '@/app/[lang]/dictionaries';
+import Link from "next/link";
+import FaChevronCircleEnd from "@/components/shared/FaChevronCircleEnd";
+import {
+  sections,
+  socials,
+  contactMethods,
+  githubLink,
+} from "@/data/variables";
+import Iconify from "../shared/Iconify";
+import { Locale } from "@/app/[lang]/dictionaries";
 
 const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
   return (
@@ -10,34 +15,22 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
       <div className="mx-auto w-full max-w-7xl px-6 py-10 space-y-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           {/* ---------- TEXT ---------- */}
-          <div
-            data-aos="zoom-in"
-            className="flex-1 space-y-3"
-          >
+          <div data-aos="zoom-in" className="flex-1 space-y-3">
             <h3 className="text-lg font-semibold tracking-tight">
               {t.footer.title}
             </h3>
-            <p className="max-w-md text-sm text-muted">
-              {t.footer.subtext}
-            </p>
+            <p className="max-w-md text-sm text-muted">{t.footer.subtext}</p>
           </div>
 
           {/* ---------- QUICK LINKS ---------- */}
-          <div
-            data-aos="zoom-in"
-            className="flex-1 space-y-3 md:max-w-xs"
-          >
+          <div data-aos="zoom-in" className="flex-1 space-y-3 md:max-w-xs">
             <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-muted">
               {t.footer.links}
             </h3>
             <nav>
               <ul className="space-y-2 text-sm text-muted">
                 {sections.map((section, i) => (
-                  <li
-                    key={section}
-                    data-aos="zoom-in"
-                    data-aos-delay={i * 100}
-                  >
+                  <li key={section} data-aos="zoom-in" data-aos-delay={i * 100}>
                     <Link
                       href={`#${section}`}
                       className="inline-flex items-center gap-2 hover:text-accent transition"
@@ -101,28 +94,34 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
             <div className="space-y-3">
               <div className="socials">
                 <ul className="flex flex-wrap items-center gap-3">
-                  {socials.map((item, i) => (
-                    <li
-                      key={item.title}
-                      title={item.title}
-                      data-aos="zoom-in"
-                      data-aos-delay={i * 100}
-                      data-aos-offset="0"
-                    >
-                      <a
-                        href={item.href}
-                        aria-label={item.title}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
+                  {socials.map((item, i) => {
+                    const socialLabel =
+                      t.common.contact_methods[
+                        item.name as keyof typeof t.common.contact_methods
+                      ];
+                    return (
+                      <li
+                        key={item.name}
+                        title={socialLabel}
+                        data-aos="zoom-in"
+                        data-aos-delay={i * 100}
+                        data-aos-offset="0"
                       >
-                        <Iconify
-                          icon={item.icon}
-                          className="transition-transform duration-300 group-hover:scale-110 group-hover:text-background"
-                        />
-                      </a>
-                    </li>
-                  ))}
+                        <a
+                          href={item.href}
+                          aria-label={socialLabel}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
+                        >
+                          <Iconify
+                            icon={item.icon}
+                            className="transition-transform duration-300 group-hover:scale-110 group-hover:text-background"
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
@@ -141,7 +140,7 @@ const Footer = ({ lang, t }: { lang: Locale; t: any }) => {
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://www.github.com/M7MD-abo-jacob/"
+            href={githubLink}
             className="text-accent hover:underline"
           >
             {t.footer.signature.name}

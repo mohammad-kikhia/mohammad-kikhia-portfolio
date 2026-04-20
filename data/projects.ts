@@ -12,7 +12,7 @@ export const projects = [
     imageSm: ImagesSrc.weatherapp_sm,
     links: {
       visit: "https://dynamic-weather-app-next13.vercel.app",
-      code: "https://github.com/M7MD-abo-jacob/Weather-App",
+      code: "https://github.com/mohammad-kikhia/weather-app",
     },
   },
   {
@@ -26,7 +26,7 @@ export const projects = [
     imageSm: ImagesSrc.ushopia_sm,
     links: {
       visit: "https://u-shopia.vercel.app/",
-      code: "https://github.com/M7MD-abo-jacob/uShopia",
+      code: "https://github.com/mohammad-kikhia/u-shopia",
     },
   },
   {
@@ -40,19 +40,21 @@ export const projects = [
     imageSm: ImagesSrc.minesweeper_sm,
     links: {
       visit: "https://react-js-minesweeper.vercel.app/",
-      code: "https://github.com/M7MD-abo-jacob/react-Minesweeper/",
+      code: "https://github.com/mohammad-kikhia/minesweeper",
     },
   },
   {
     name_en: "My Portfolio",
     name_ar: "معرض أعمالي",
-    desc_en: "THIS WEBSITE!",
-    desc_ar: "هذا الموقع!",
+    desc_en:
+      "My portfolio—this site—built on Next.js 16 with Tailwind CSS, bilingual EN/AR routing, light/dark theming, and AOS-driven section motion. The contact form uses React Hook Form with Zod validation and sends mail through EmailJS from a dedicated Next.js API route.",
+    desc_ar:
+      "معرض أعمالي الشخصي (هذا الموقع) مبني على Next.js 16 وTailwind CSS، مع توجيه ثنائي اللغة (عربي/إنجليزي) وتبديل السمة الفاتحة/الداكنة وتأثيرات AOS. نموذج التواصل يستخدم React Hook Form مع تحقق Zod والإرسال عبر EmailJS عبر مسار API في Next.js.",
     imageLg: ImagesSrc.portfolio_lg,
     imageSm: ImagesSrc.portfolio_sm,
     links: {
       visit: "https://mohammad-kikhia.vercel.app",
-      code: "https://github.com/M7MD-abo-jacob/Mohammad-Kikhia",
+      code: "https://github.com/mohammad-kikhia/mohammad-kikhia-portfolio",
     },
   },
 ];

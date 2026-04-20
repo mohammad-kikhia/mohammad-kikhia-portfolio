@@ -94,15 +94,20 @@ export default async function Home({
             data-aos-delay="180"
           >
             <ul className="flex flex-wrap items-center gap-3">
-              {socials.map((item, i) => (
-                <li key={item.title}>
+              {socials.map((item, i) => {
+                const socialLabel =
+                  dictionary.common.contact_methods[
+                    item.name as keyof typeof dictionary.common.contact_methods
+                  ];
+                return (
+                <li key={item.name}>
                   <a
-                    title={item.title}
+                    title={socialLabel}
                     data-aos="zoom-out-down"
                     data-aos-delay={i * 150}
                     data-aos-offset="0"
                     href={item.href}
-                    aria-label={item.title}
+                    aria-label={socialLabel}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-transparent text-accent shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:text-background hover:scale-110 hover:shadow-accent"
@@ -113,7 +118,8 @@ export default async function Home({
                     />
                   </a>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </div>
         </div>
