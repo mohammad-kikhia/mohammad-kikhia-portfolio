@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import Image from 'next/image';
-import Iconify from '@/components/shared/Iconify';
-import { ImagesSrc } from '@/data/files';
+import { useState, useRef } from "react";
+import Image from "next/image";
+import Iconify from "@/components/shared/Iconify";
+import { ImagesSrc } from "@/data/files";
 
 type ProjectInfo = {
   name_en: string;
   name_ar: string;
   desc_en: string;
   desc_ar: string;
-  image: string;
+  imageLg: string;
+  imageSm: string;
   links: {
     visit: string;
     code: string;
@@ -23,7 +24,7 @@ type ProjectsCarouselProps = {
     visit: string;
     code: string;
   };
-  lang: 'en' | 'ar';
+  lang: "en" | "ar";
 };
 
 export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
@@ -37,9 +38,9 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
   const name = (current as any)[`name_${lang}`] || current.name_en;
   const desc = (current as any)[`desc_${lang}`] || current.desc_en;
 
-  const go = (direction: 'prev' | 'next') => {
+  const go = (direction: "prev" | "next") => {
     setIndex((prev) => {
-      if (direction === 'next') {
+      if (direction === "next") {
         return (prev + 1) % total;
       }
       return (prev - 1 + total) % total;
@@ -65,9 +66,9 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
 
     const threshold = 50; // pixels
     if (dragDeltaX.current > threshold) {
-      go('prev');
+      go("prev");
     } else if (dragDeltaX.current < -threshold) {
-      go('next');
+      go("next");
     }
 
     setIsDragging(false);
@@ -144,16 +145,16 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
             return (
               <div
                 key={project.name_en}
-                className="absolute inset-y-0 my-auto flex h-88 w-64 items-center justify-center overflow-hidden rounded-2xl border border-accent/50 bg-slate-900/80 shadow-xl shadow-black/40 backdrop-blur-sm md:h-80 md:w-80 lg:w-md"
+                className="absolute inset-y-0 my-auto flex h-88 w-64 items-center justify-center overflow-hidden rounded-2xl border border-accent/50 bg-slate-900/80 shadow-xl shadow-black/40 backdrop-blur-sm md:h-60 md:w-96 lg:h-80 lg:w-lg"
                 style={{
                   transform: `translateX(${translateXPercent}%) scale(${scale})`,
                   opacity,
                   filter: `blur(${blur}px)`,
                   zIndex,
                   transition:
-                    'transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), filter 0.9s ease-in-out',
-                  willChange: 'transform, opacity, filter',
-                  cursor: 'grab',
+                    "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), filter 0.9s ease-in-out",
+                  willChange: "transform, opacity, filter",
+                  cursor: "grab",
                 }}
                 onClick={() => {
                   if (!isCenter) {
@@ -163,11 +164,20 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
               >
                 <div className="relative h-full w-full">
                   <Image
-                    src={project.image}
+                    src={project.imageSm}
                     alt={project.name_en}
                     fill
-                    sizes="480px"
-                    className="object-cover object-top"
+                    sizes="(max-width: 767px) min(90vw, 20rem), 320px"
+                    className="object-cover object-top md:hidden"
+                    draggable={false}
+                  />
+                  <Image
+                    src={project.imageLg}
+                    alt={project.name_en}
+                    fill
+                    sizes="(min-width: 768px) min(45vw, 28rem), 100vw"
+                    className="hidden object-cover object-top md:block"
+                    draggable={false}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
                 </div>
@@ -177,35 +187,39 @@ export function ProjectsCarousel({ projects, t, lang }: ProjectsCarouselProps) {
         </div>
 
         {/* Details for the active (center) project */}
-        <div className="w-full rounded-xl border border-slate-700/60 px-4 py-4 shadow-lg shadow-black/30 backdrop-blur-sm">
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold uppercase tracking-wide">
-              {name}
-            </h3>
-            <p className="text-xs text-muted">{desc}</p>
+        <div className="w-full overflow-hidden rounded-2xl border border-slate-300/60 bg-linear-to-br from-accent/7 via-background/95 to-background shadow-lg shadow-black/5 ring-1 ring-accent/10 backdrop-blur-md dark:border-slate-700/70 dark:from-accent/12 dark:via-slate-950/70 dark:to-slate-950/50 dark:shadow-black/30 dark:ring-accent/15">
+          <div className="border-b border-slate-200/70 px-5 py-5 dark:border-slate-700/60 md:px-6 md:py-6">
+            <div className="border-s-2 border-accent ps-4 md:ps-5">
+              <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground md:text-lg">
+                {name}
+              </h3>
+              <p className="mt-2 max-w-prose text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
+                {desc}
+              </p>
+            </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="flex flex-col gap-3 bg-slate-50/80 px-5 py-4 dark:bg-slate-950/50 sm:flex-row sm:flex-wrap sm:items-stretch md:px-6">
             <a
               href={current.links.visit}
               target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-full bg-accent px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-lg shadow-accent transition hover:brightness-110"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-md shadow-accent/30 transition hover:brightness-110 active:scale-[0.98]"
             >
-              <Iconify icon="fa:eye" className="text-white" />
+              <Iconify icon="fa:eye" className="text-[1.05rem] text-white" />
               {t.visit}
             </a>
             <a
               href={current.links.code}
               target="_blank"
-              rel="noreferrer"
-              className="group inline-flex min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-full border border-accent/40 bg-transparent px-3 py-2 text-xs font-semibold uppercase tracking-wide text-accent shadow-sm transition-[border-color,background-color,color,box-shadow] duration-200 ease-out hover:border-accent hover:bg-accent hover:text-background hover:shadow-sm"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-11 min-w-[min(100%,140px)] flex-1 items-center justify-center gap-2 rounded-xl border border-accent/35 bg-background/80 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-accent shadow-sm transition duration-200 ease-out hover:border-accent hover:bg-accent hover:text-white hover:shadow-md hover:shadow-accent/20 active:scale-[0.98] dark:bg-slate-900/60 dark:hover:text-white"
             >
               <Iconify
                 icon="fa:code"
-                className="text-current transition-colors duration-200 group-hover:text-background"
+                className="text-[1.05rem] text-current transition-colors duration-200 group-hover:text-white"
               />
-              <span className="transition-colors duration-200 group-hover:text-background">
+              <span className="transition-colors duration-200 group-hover:text-white">
                 {t.code}
               </span>
             </a>

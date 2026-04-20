@@ -1,10 +1,10 @@
-import Iconify from '@/components/shared/Iconify';
-import { getDictionary, Locale } from '../dictionaries';
-import { projects } from '@/data/projects';
-import { ProjectsCarousel } from '@/components/projects/ProjectsCarousel';
+import Iconify from "@/components/shared/Iconify";
+import { getDictionary } from "../dictionaries";
+import { projects } from "@/data/projects";
+import { ProjectsCarousel } from "@/components/projects/ProjectsCarousel";
 
 function renderWithSpan(template: string) {
-  const parts = template.split('{span}');
+  const parts = template.split("{span}");
   return (
     <>
       {parts.map((part, index) =>
@@ -20,21 +20,14 @@ function renderWithSpan(template: string) {
   );
 }
 
-const Work = async ({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) => {
+const Work = async ({ params }: { params: Promise<{ lang: string }> }) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const t = dictionary.projects;
-  const currentLang: 'en' | 'ar' = lang === 'ar' ? 'ar' : 'en';
+  const currentLang: "en" | "ar" = lang === "ar" ? "ar" : "en";
 
   return (
-    <section
-      id="projects"
-      className="py-16"
-    >
+    <section id="projects" className="py-16">
       <div className="mx-auto w-full max-w-7xl px-6 overflow-hidden">
         {/* <div className="border rounded-2xl border-accent shadow-accent px-6 py-10 md:px-10 md:py-12"> */}
         <div className="">
@@ -58,11 +51,12 @@ const Work = async ({
                 </p>
               </div>
 
-              <div
-                data-aos="fade-up"
-                data-aos-delay="70"
-              >
-                <ProjectsCarousel projects={projects} t={t} lang={currentLang} />
+              <div data-aos="fade-up" data-aos-delay="70">
+                <ProjectsCarousel
+                  projects={projects}
+                  t={t}
+                  lang={currentLang}
+                />
               </div>
             </div>
           </div>
