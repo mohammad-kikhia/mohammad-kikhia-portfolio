@@ -132,6 +132,9 @@ export async function generateMetadata({
         },
       ],
     },
+    verification: {
+      google: '0lLYUOhvd2KHb4IwuZ2yIWDjjqsMsGv00EmhZS952Vc',
+    },
   };
 }
 
