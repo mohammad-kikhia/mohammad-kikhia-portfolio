@@ -3,7 +3,7 @@ const baseFilesPath = `${basePath}files/`;
 const baseImagesPath = `${basePath}img/`;
 
 export const FilesSrc = {
-  resumePath: `${baseFilesPath}/mohammad-kikhia.pdf`,
+  resumePath: `${baseFilesPath}/mohammad-kikhia.docx`,
 };
 
 export const ImagesSrc = {
