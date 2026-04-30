@@ -8,6 +8,7 @@ import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/header/Navbar";
 import { rtlLanguages } from "@/data/variables";
 import { ImagesSrc } from "@/data/files";
+import { SITE_URL } from "@/data/costants";
 import "../globals.css";
 import 'aos/dist/aos.css';
 import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
@@ -36,7 +37,12 @@ export async function generateMetadata({
     author: dictionary?.common?.metadata?.author,
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia.vercel.app';
+  const siteUrl = SITE_URL;
+  const localePath = `/${lang}`;
+  const localeUrl = new URL(localePath, siteUrl).toString();
+  const defaultAuthor = dictionary?.common?.metadata?.author;
+  const ogImagePrimary = new URL(ImagesSrc.me1, siteUrl).toString();
+  const ogImageSecondary = new URL(ImagesSrc.me2, siteUrl).toString();
 
   return {
     metadataBase: new URL(siteUrl),
@@ -45,6 +51,14 @@ export async function generateMetadata({
       default: metaData.title,
     },
     description: metaData.description,
+    alternates: {
+      canonical: localePath,
+      languages: {
+        en: '/en',
+        ar: '/ar',
+        'x-default': '/en',
+      },
+    },
     icons: {
       // icon: '../favicon.ico',
       icon: '/icon',
@@ -61,7 +75,7 @@ export async function generateMetadata({
         'max-image-preview': 'large',
       },
     },
-    applicationName: metaData.title,
+    applicationName: defaultAuthor,
     keywords: [
       'Mohammad Kikhia',
       'محمد كيخيا',
@@ -101,31 +115,35 @@ export async function generateMetadata({
     ],
     authors: [
       { name: metaData.author },
-      { name: metaData.author, url: 'https://mohammad-kikhia.vercel.app' },
+      { name: metaData.author, url: siteUrl },
     ],
     category: 'technology',
-    publisher: metaData.author,
-    creator: metaData.author,
+    publisher: defaultAuthor,
+    creator: defaultAuthor,
     twitter: {
-      card: metaData.title,
+      card: 'summary_large_image',
       title: metaData.title,
       description: metaData.description,
-      images: [ImagesSrc.me1, ImagesSrc.me2],
+      creator: defaultAuthor,
+      images: [ogImagePrimary],
     },
     openGraph: {
       title: metaData.title,
       description: metaData.description,
+      type: 'website',
+      locale: lang === 'ar' ? 'ar' : 'en',
+      alternateLocale: lang === 'ar' ? 'en' : 'ar',
       siteName: metaData.title,
-      url: 'https://mohammad-kikhia.vercel.app',
+      url: localeUrl,
       images: [
         {
-          url: ImagesSrc.me1,
+          url: ogImagePrimary,
           width: 800,
           height: 600,
           alt: metaData.author,
         },
         {
-          url: ImagesSrc.me2,
+          url: ogImageSecondary,
           width: 1800,
           height: 1600,
           alt: metaData.author,

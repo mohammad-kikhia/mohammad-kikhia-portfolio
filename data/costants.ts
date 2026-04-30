@@ -1,4 +1,6 @@
 export const DEFAULT_LOCALE = 'en';
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohammad-kikhia.vercel.app';
 
 export const LOCALES_List = [
     { code: 'en', name: 'English', flag: 'twemoji:flag-united-kingdom' },

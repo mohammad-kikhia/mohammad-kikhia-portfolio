@@ -27,8 +27,13 @@ export function proxy(request) {
 
   if (pathnameHasLocale) return
 
-  // Next.js App Router metadata routes (must not get a locale prefix)
-  if (pathname === '/icon' || pathname === '/apple-icon') {
+  // Next.js metadata routes (must not get a locale prefix)
+  if (
+    pathname === '/icon' ||
+    pathname === '/apple-icon' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt'
+  ) {
     return
   }
 
