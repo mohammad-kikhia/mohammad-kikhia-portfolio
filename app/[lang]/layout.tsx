@@ -76,6 +76,7 @@ export async function generateMetadata({
       },
     },
     applicationName: defaultAuthor,
+    siteName: defaultAuthor,
     keywords: [
       'Mohammad Kikhia',
       'محمد كيخيا',
