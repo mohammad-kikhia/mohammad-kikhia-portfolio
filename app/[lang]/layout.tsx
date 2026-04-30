@@ -10,17 +10,17 @@ import { rtlLanguages } from "@/data/variables";
 import { ImagesSrc } from "@/data/files";
 import { SITE_URL } from "@/data/costants";
 import "../globals.css";
-import 'aos/dist/aos.css';
+import "aos/dist/aos.css";
 import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
 
 const lemonada = Lemonada({
-  subsets: ['latin', 'arabic'],
-  variable: '--lemonada',
-  weight: ['400', '500', '600', '700'],
+  subsets: ["latin", "arabic"],
+  variable: "--lemonada",
+  weight: ["400", "500", "600", "700"],
 });
 
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'ar' }]
+  return [{ lang: "en" }, { lang: "ar" }];
 }
 
 export async function generateMetadata({
@@ -35,7 +35,7 @@ export async function generateMetadata({
     title: dictionary?.common?.metadata?.title,
     description: dictionary?.common?.metadata?.description,
     author: dictionary?.common?.metadata?.author,
-  }
+  };
 
   const siteUrl = SITE_URL;
   const localePath = `/${lang}`;
@@ -54,14 +54,14 @@ export async function generateMetadata({
     alternates: {
       canonical: localePath,
       languages: {
-        en: '/en',
-        ar: '/ar',
-        'x-default': '/en',
+        en: "/en",
+        ar: "/ar",
+        "x-default": "/en",
       },
     },
     icons: {
       // icon: '../favicon.ico',
-      icon: '/icon',
+      icon: "/icon",
     },
     robots: {
       index: true,
@@ -72,57 +72,57 @@ export async function generateMetadata({
         follow: true,
         noimageindex: true,
         notranslate: true,
-        'max-image-preview': 'large',
+        "max-image-preview": "large",
       },
     },
     applicationName: defaultAuthor,
     siteName: defaultAuthor,
     keywords: [
-      'Mohammad Kikhia',
-      'محمد كيخيا',
-      'Frontend Developer',
-      'مطور ويب',
-      'Web Development',
-      'تطوير الويب',
-      'NextJS',
-      'نيكست جي اس',
-      'ReactJS',
-      'رياكت جي اس',
-      'JavaScript',
-      'TypeScript',
-      'HTML',
-      'CSS',
-      'Syria',
-      'سوريا',
-      'Latakia',
-      'Lattakia',
-      'اللاذقية',
-      'User Interface',
-      'User Experience',
-      'UI',
-      'UX',
-      'Responsive Design',
-      'Version Control',
-      'Git',
-      'GitHub',
-      'Node.js',
-      'JSON',
-      'REST API',
-      'Redux',
-      'SSR',
-      'Server Side Rendering',
-      'SEO',
-      'Search Engine Optimization',
+      "Mohammad Kikhia",
+      "محمد كيخيا",
+      "Frontend Developer",
+      "مطور ويب",
+      "Web Development",
+      "تطوير الويب",
+      "NextJS",
+      "نيكست جي اس",
+      "ReactJS",
+      "رياكت جي اس",
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "Syria",
+      "سوريا",
+      "Latakia",
+      "Lattakia",
+      "اللاذقية",
+      "User Interface",
+      "User Experience",
+      "UI",
+      "UX",
+      "Responsive Design",
+      "Version Control",
+      "Git",
+      "GitHub",
+      "Node.js",
+      "JSON",
+      "REST API",
+      "Redux",
+      "SSR",
+      "Server Side Rendering",
+      "SEO",
+      "Search Engine Optimization",
     ],
     authors: [
       { name: metaData.author },
       { name: metaData.author, url: siteUrl },
     ],
-    category: 'technology',
+    category: "technology",
     publisher: defaultAuthor,
     creator: defaultAuthor,
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: metaData.title,
       description: metaData.description,
       creator: defaultAuthor,
@@ -131,9 +131,10 @@ export async function generateMetadata({
     openGraph: {
       title: metaData.title,
       description: metaData.description,
-      type: 'website',
-      locale: lang === 'ar' ? 'ar' : 'en',
-      alternateLocale: lang === 'ar' ? 'en' : 'ar',
+      siteUrl: siteUrl,
+      type: "website",
+      locale: lang === "ar" ? "ar" : "en",
+      alternateLocale: lang === "ar" ? "en" : "ar",
       siteName: metaData.title,
       url: localeUrl,
       images: [
@@ -152,7 +153,7 @@ export async function generateMetadata({
       ],
     },
     verification: {
-      google: '0lLYUOhvd2KHb4IwuZ2yIWDjjqsMsGv00EmhZS952Vc',
+      google: "0lLYUOhvd2KHb4IwuZ2yIWDjjqsMsGv00EmhZS952Vc",
     },
   };
 }
@@ -175,23 +176,23 @@ export default async function RootLayout({
   contact: ReactNode;
 }>) {
   const { lang } = await params;
-  if (!hasLocale(lang)) notFound()
+  if (!hasLocale(lang)) notFound();
   const dictionary = await getDictionary(lang);
 
   const cookieStore = await cookies();
-  const themeCookie = cookieStore.get('theme')?.value;
-  const theme: 'light' | 'dark' =
-    themeCookie === 'dark' || themeCookie === 'light'
-      ? themeCookie
-      : 'light';
+  const themeCookie = cookieStore.get("theme")?.value;
+  const theme: "light" | "dark" =
+    themeCookie === "dark" || themeCookie === "light" ? themeCookie : "light";
 
   return (
     <html
-      className={`overflow-x-hidden ${lemonada.className} ${lemonada.variable} ${theme === 'dark' ? 'dark' : ''
-        }`}
+      className={`overflow-x-hidden ${lemonada.className} ${lemonada.variable} ${
+        theme === "dark" ? "dark" : ""
+      }`}
       lang={lang}
-      dir={rtlLanguages.includes(lang) ? 'rtl' : 'ltr'}
-      data-theme={theme}>
+      dir={rtlLanguages.includes(lang) ? "rtl" : "ltr"}
+      data-theme={theme}
+    >
       <body className="overflow-hidden">
         <Providers dictionary={dictionary}>
           <Navbar lang={lang} t={dictionary} />
