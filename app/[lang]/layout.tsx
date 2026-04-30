@@ -135,7 +135,8 @@ export async function generateMetadata({
       type: "website",
       locale: lang === "ar" ? "ar" : "en",
       alternateLocale: lang === "ar" ? "en" : "ar",
-      siteName: metaData.title,
+      siteName: defaultAuthor,
+      applicationName: defaultAuthor,
       url: localeUrl,
       images: [
         {
