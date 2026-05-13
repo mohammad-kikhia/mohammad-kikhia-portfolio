@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { SITE_URL } from '@/data/costants';
+import { SITE_URL, SITEMAP_URL } from '@/data/costants';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: SITEMAP_URL,
     host: SITE_URL,
   };
 }

@@ -70,7 +70,6 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        noimageindex: true,
         notranslate: true,
         "max-image-preview": "large",
       },
@@ -131,12 +130,10 @@ export async function generateMetadata({
     openGraph: {
       title: metaData.title,
       description: metaData.description,
-      siteUrl: siteUrl,
       type: "website",
       locale: lang === "ar" ? "ar" : "en",
       alternateLocale: lang === "ar" ? "en" : "ar",
       siteName: defaultAuthor,
-      applicationName: defaultAuthor,
       url: localeUrl,
       images: [
         {
